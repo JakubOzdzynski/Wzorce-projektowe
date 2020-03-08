@@ -3,12 +3,13 @@ package patterns.behavioral.chainOfResponsibility;
 public class Main {
     public static void main(String[] args) {
         Employees employees = new Employees();
-        employees.addEmployee("Jan", 5);
-        employees.addEmployee("Maria", 12);
-        employees.addEmployee("Wiesław", 8);
+        employees.addEmployee("Jan", 5, "accountant");
+        employees.addEmployee("Maria", 12, "sales");
+        employees.addEmployee("Wiesław", 11, "purchasing");
 
         AccessCheck accessCheck = new CompanyInsideCheck();
         accessCheck.addChainElement(new EmployeeSeniorityCheck());
+        accessCheck.addChainElement(new EmployeeDepartmentCheck());
 
         Company company = new Company("Taka firma");
         company.setCheck(accessCheck);
@@ -20,7 +21,7 @@ public class Main {
         System.out.println("====================");
         company.enterRoom("Maria");
         System.out.println("====================");
-        company.enterRoom("Wisław");
+        company.enterRoom("Wiesław");
         System.out.println("====================");
     }
 }
